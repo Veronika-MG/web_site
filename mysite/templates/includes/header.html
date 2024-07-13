@@ -1,0 +1,34 @@
+{% load static %}
+<header class="d-flex justify-content-center py-3">
+  <ul class="nav nav-pills">
+    {% with request.resolver_match.view_name as view_name %}
+      <li class="nav-item"><a href="{% url 'homepage:homepage' %}" class="nav-link {% if view_name == 'homepage:homepage' %}active{% endif %}" aria-current="page">
+        Главная
+      </a></li>
+      <li class="nav-item"><a href="{% url 'services:services' %}" class="nav-link {% if view_name == 'services:services' %}active{% endif %}" aria-current="page">
+        Услуги
+      </a></li>
+      <li class="nav-item"><a href="{% url 'reviews:reviews' %}" class="nav-link {% if view_name == 'reviews:reviews' %}active{% endif %}" aria-current="page">
+        Отзывы
+      </a></li>
+      <li class="nav-item"><a href="{% url 'about:about' %}" class="nav-link {% if view_name == 'about:about' %}active{% endif %}" aria-current="page">
+        О нас
+      </a></li>
+      {% if request.user.is_anonymous %}
+        <li class="nav-item"><a href="{% url 'auth:login' %}" class="nav-link {% if view_name == 'auth:login' %}active{% endif %}" aria-current="page">
+          Войти
+        </a></li>
+        <li class="nav-item"><a href="{% url 'auth:signup' %}" class="nav-link {% if view_name == 'auth:signup' %}active{% endif %}" aria-current="page">
+          Зарегистрироваться
+        </a></li>
+      {% else %}
+        <li class="nav-item"><a href="{% url 'user:user' %}" class="nav-link {% if view_name == 'user:user' %}active{% endif %}" aria-current="page">
+          Профиль
+        </a></li>
+        <li class="nav-item"><a href="{% url 'auth:logout' %}" class="nav-link {% if view_name == 'auth:logout' %}active{% endif %}" aria-current="page">
+          Выйти
+        </a></li>
+      {% endif %}
+    {% endwith %}
+  </ul>
+</header>

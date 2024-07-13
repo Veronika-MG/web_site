@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Замена фотографии
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="my-4">Замена фотографии</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

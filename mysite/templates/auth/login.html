@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <h1>Войти</h1>
+  <form method="post" action="{% url 'auth:login' %}" class="form">
+    {% csrf_token %}
+    {% include "includes/form.html" %}
+    <input
+      class="btn btn-primary"
+      type="submit"
+      value="Отправить"
+    />
+  </form>
+</div>
+{% endblock %}

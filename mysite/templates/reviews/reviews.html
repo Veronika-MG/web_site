@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Отзывы
+{% endblock %}
+
+{% block body %}
+  {% load static %}
+  <h3 style="text-align: center; margin-top: 50px; margin-bottom: 30px;">Последнии отзывы наших клиетов!</h3>
+  <div class="carousel" style="width: 90%;">
+    <div class="carousel-box">
+      {% for review in reviews %}
+        <div class="carousel-box__item" data-name="{{ review.profile }}" data-who="{{ review.date }}"
+             data-review="{{ review.text }}">
+          <div class="carousel-box__item_img">
+            {% if review.profile.image %}
+              <i><img style="width: 300px; height: 300px;" src="{{ review.profile.image.url }}"></i>
+            {% else %}
+              <img style="width: 400px; height: 400px;" src="{% static 'img/no_image.png' %}">
+            {% endif %}
+          </div>
+          <span class="carousel-box__item_desc">{{ review.profile }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="carousel-content">
+      {% if reviews %}
+        {% with first_review=reviews.0 %}
+          <div class="carousel-content__name">{{ first_review.profile }}</div>
+          <div class="carousel-content__who">{{ review.date }}</div>
+          <div class="carousel-content__review">{{ first_review.text }}</div>
+        {% endwith %}
+      {% endif %}
+    </div>
+    <div class="carousel-arrow">
+      <span class="carousel-arrow__next"></span>
+      <span class="carousel-arrow__prev"></span>
+    </div>
+  </div>
+
+  <h3 style="text-align: center; margin-top: 50px; margin-bottom: 30px;">Оставьте ваш отзыв</h3>
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ review_form.text.label_tag }}
+        {{ review_form.text }}
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+    </form>
+  </div>
+  <br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+О нас
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<div class="container" style="margin-top: 40px;">
+    <h2 class="text-primary">Темы, затрагиваемые медицинской диагностикой:</h2>
+    <ul>
+        <li>Рентгенология и изображение</li>
+        <li>Лабораторные анализы и биохимия</li>
+        <li>Ультразвуковая диагностика</li>
+        <li>Генетическое тестирование и молекулярная диагностика</li>
+    </ul>
+
+    <h2 class="text-primary">Наши контакты</h2>
+    <ul>
+        <li>Телефон: +7 (495) 311-11-11</li>
+        <li>Email: best@clinic.ru</li>
+        <li>Адрес: ул. Здоровченко, д. 10, офис 301</li>
+    </ul>
+    <h2 class="text-primary">График работы</h2>
+    <table class="table table-bordered working-hours">
+        <tr>Для вашего удобства мы работаем круглосуточно.</tr>
+    </table>
+</div>
+
+{% endblock %}

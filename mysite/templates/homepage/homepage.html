@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Главная
+{% endblock %}
+
+{% block body %}
+  {% load static %}
+
+  <section style="width: 900px; height: 60vh; margin: auto; margin-top: 90px;">
+    <div style="display: flex; justify-content: space-between;">
+      <div style="width: 60%;">
+      <h1 style="font-size: 40px; font-weight: bold;">Бест Клиник</h1>
+      <p style="font-size: 20px;"><strong>Мы поможем вам разобраться в ситуации!</strong><br>Благодаря нашим диагностическим процедурам на передовом японском оборудовании, вы получите высококачественную диагностику в различных областях.</p>
+      <div style="margin-top: 40px;">
+        <a class="btn btn-outline-primary" style="width: 110px;" href="{% url 'services:services' %}">Услуги</a>
+        <a class="btn btn-outline-success" style="width: 110px;" href="{% url 'reviews:reviews' %}">Отзывы</a>
+        <a class="btn btn-outline-info" style="width: 110px;" href="{% url 'about:about' %}">О нас</a>
+      </div>
+      </div>
+      <div style="">
+        <img src="{% static 'img/image.png' %}" style="object-fit: cover; width: 320px; height: 320px;">
+      </div>
+    </div>
+  </section>
+{% endblock %}

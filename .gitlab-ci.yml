@@ -1,0 +1,28 @@
+image: python:3.11
+
+before_script:
+  - pip install -r requirements.txt
+
+stages:
+  - linting
+  - tests
+
+flake8:
+  stage: linting
+  script:
+    - flake8 --verbose --import-order-style=google
+
+black_check:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/black:latest
+  script:
+    - black --check --config .black .
+
+test:
+  stage: tests
+  image: python:3.11
+  script:
+    - pip install -r requirements.txt
+    - cd web_site
+    - python manage.py migrate
+    - python manage.py test

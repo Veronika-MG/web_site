@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Регистрация</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% include "includes/form.html" %}
+        <input class="btn btn-primary" type="submit" value="Отправить">
+    </form>
+</div>
+{% endblock %}
