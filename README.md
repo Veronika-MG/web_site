@@ -20,6 +20,21 @@
 -Описать документацию в файле Readme в корне проекта
 
 # Для запуска:
-Заполнить файл template.env, изменить его название на .env
 
+1) Склонируйте репозиторий на свой компьютер:
+git clone git@github.com:Veronika-MG/web_site.git
+2) Заполнить файл template.env, изменить его название на .env 3Создайте виртуальное окружение и активируйте его:
+python -m venv venv
+source venv/bin/activate
+-Примечание: В Windows команда для активации виртуального окружения будет отличаться:
+venv\Scripts\activate
+3) Установите зависимости:
+pip install -r requirements.txt
+4)  Зайдите в pgAdmin и создать базу данных с названием med_database
+5)  В терминале PyCharm зайдите в директорию проекта с помощью команды cd mysite
+6)  Примените миграции с помощью команды:
+python manage.py migrate
+7)  Загрузите данные с помощью команды:
+python manage.py loaddata fixtures/data.json
+8)  Запустите проект с помощью команды:
 python manage.py runserver
