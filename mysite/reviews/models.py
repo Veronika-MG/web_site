@@ -6,6 +6,7 @@ from user.models import Profile
 
 
 class Review(models.Model):
+    """Класс отзыва"""
     def user_email(self):
         return self.profile.user.email
 

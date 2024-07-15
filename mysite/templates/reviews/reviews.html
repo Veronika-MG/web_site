@@ -16,7 +16,7 @@
             {% if review.profile.image %}
               <i><img style="width: 300px; height: 300px;" src="{{ review.profile.image.url }}"></i>
             {% else %}
-              <img style="width: 400px; height: 400px;" src="{% static 'img/no_image.png' %}">
+              <i><img style="width: 300px; height: 300px;" src="{% static 'img/no_image.png' %}"></i>
             {% endif %}
           </div>
           <span class="carousel-box__item_desc">{{ review.profile }}</span>

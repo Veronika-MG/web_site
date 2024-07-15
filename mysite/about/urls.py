@@ -4,4 +4,6 @@ from .views import about
 
 app_name = "about"
 
-urlpatterns = [path("", about, name="about")]
+urlpatterns = [
+    path("", about, name="about")
+]

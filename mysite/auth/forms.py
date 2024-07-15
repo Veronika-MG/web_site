@@ -7,6 +7,7 @@ from mysite.mixins import BaseFormMixin
 
 
 class UserRegisterForm(BaseFormMixin, UserCreationForm):
+    """Класс, отвечающий за форму регистрации"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_field_attributes()
@@ -19,6 +20,7 @@ class UserRegisterForm(BaseFormMixin, UserCreationForm):
 
 
 class MyLoginForm(auth.forms.AuthenticationForm, BaseFormMixin):
+    """Класс, отвечающий за форму авторизация"""
     def __init__(self, *args, **kwargs):
         super(MyLoginForm, self).__init__(*args, **kwargs)
         self.set_field_attributes()

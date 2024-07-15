@@ -11,6 +11,7 @@ import os
 
 
 class Profile(models.Model):
+    """Класс профиля"""
     def upload_to(self, filename):
         email = self.user.email
         file_name, file_extension = os.path.splitext(filename)
@@ -20,19 +21,18 @@ class Profile(models.Model):
     def user_email(self):
         return self.user.email
 
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
         "фотография",
         upload_to=upload_to,
+        null=True,
+        blank=True,
     )
 
     def get_image_300x300(self):
         return get_thumbnail(
             self.image,
-            "50x300",
+            "50x50",
             quality=100,
         )
 
@@ -57,9 +57,11 @@ class Profile(models.Model):
     def update(self):
         BASE_DIR = settings.BASE_DIR
 
-        email = self.user.email
+        email = self.user_email()
         try:
-            path_to_directory = os.path.join(BASE_DIR, "media", "images", email)
+            path_to_directory = os.path.join(
+                BASE_DIR, "media", "images", email
+            )
             for filename in os.listdir(path_to_directory):
                 path_to_file = os.path.join(path_to_directory, filename)
                 os.remove(path_to_file)
@@ -70,9 +72,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(
-            user=instance
-        )
+        Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)

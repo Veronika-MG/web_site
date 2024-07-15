@@ -3,8 +3,12 @@ from django.contrib.auth.models import User
 
 
 class Service(models.Model):
+    """Класс услуг"""
     title = models.CharField(
-        verbose_name="заголовок", null=False, validators=[], max_length=64
+        verbose_name="заголовок",
+        null=False,
+        validators=[],
+        max_length=64
     )
     text = models.TextField(
         verbose_name="описание",
@@ -27,6 +31,7 @@ class Service(models.Model):
 
 
 class Booking(models.Model):
+    """Класс брони"""
     service = models.ForeignKey(
         Service,
         on_delete=models.CASCADE,

@@ -5,14 +5,20 @@ from datetime import datetime, timedelta
 
 
 def services(request):
+    """Функция, отвечающая за страничку 'Услуги'"""
     template_dir = "services/services.html"
 
-    context = {"services": Service.objects.all()}
+    services = Service.objects.all()
+
+    context = {
+        "services": services
+    }
 
     return render(request, template_dir, context=context)
 
 
 def detail(request, id):
+    """Функция, отвечающая за страничку 'Об услуге'"""
     template_dir = "services/detail.html"
 
     service = get_object_or_404(Service, id=id)
@@ -25,6 +31,7 @@ def detail(request, id):
 
 
 def booking(request, id):
+    """Функция, отвечающая за страничку 'Бронь'"""
     template_dir = "services/booking.html"
 
     service = get_object_or_404(Service, id=id)
@@ -39,7 +46,11 @@ def booking(request, id):
             datetime_str = request.POST.get("datetime")
             datetime_ = datetime.strptime(datetime_str, "%Y-%m-%dT%H:%M")
             if datetime_ > current_datetime:
-                book_obj = Booking(service=service, user=user, datetime=datetime_)
+                book_obj = Booking(
+                    service=service,
+                    user=user,
+                    datetime=datetime_
+                )
                 book_obj.save()
                 return redirect("user:user")
             return redirect("services:booking", id=service.id)

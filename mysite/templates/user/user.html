@@ -32,18 +32,23 @@
               <hr>
               <ul>
                 {% for booking in bookings_future %}
-                  <li style="background-color: #c2ff66; border-radius: 0 10px; padding: 10px; margin-right: 15px; min-height: 70px; height: 70px;">
-                    <span style="font-size: 110%;"><strong>{{ booking.service.title }}</strong></span><br>
-                    на {{ booking.datetime }}
+                  <li style="background-color: #c2ff66; border-radius: 0 10px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <span style="font-size: 110%;"><strong>{{ booking.service.title }}</strong></span><br>
+                      на {{ booking.datetime }}
+                    </div>
+                    <button class="btn btn-outline-primary" onclick="delete_booking({{ booking.id }})">Удалить</button>
                   </li>
-                  <hr>
                 {% endfor %}
+
                 {% for booking in bookings_past %}
-                  <li style="background-color: #b9bdb3; border-radius: 0 10px; padding: 10px; margin-right: 15px; min-height: 70px; height: 70px;">
-                    <span style="font-size: 110%;"><strong>{{ booking.service.title }}</strong></span><br>
-                    на {{ booking.datetime }}
+                  <li style="background-color: #b9bdb3; border-radius: 0 10px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <span style="font-size: 110%;"><strong>{{ booking.service.title }}</strong></span><br>
+                      на {{ booking.datetime }}
+                    </div>
+                    <button class="btn btn-outline-primary" onclick="delete_booking({{ booking.id }})">Удалить</button>
                   </li>
-                  <hr>
                 {% endfor %}
               </ul>
             </div>
@@ -53,4 +58,37 @@
     </div>
   </div>
   <br><br><br><br><br>
+<script>
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function delete_booking(id) {
+  var csrftoken = getCookie('csrftoken');
+  $.ajax({
+          url: 'delete_booking/',
+          type: 'POST',
+          headers: {
+              'X-CSRFToken': csrftoken
+          },
+          data: {
+              id: Number(id),
+          },
+          success: function () {
+            location.reload()
+          },
+      })
+}
+</script>
 {% endblock %}

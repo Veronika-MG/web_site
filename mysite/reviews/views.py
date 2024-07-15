@@ -5,6 +5,7 @@ from .forms import ReviewForm
 
 
 def reviews(request):
+    """Функция, отвечающая за страничку 'Отзывы'"""
     template_dir = "reviews/reviews.html"
 
     reviews_list = Review.objects.all().order_by("-date")
